@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="crm.css">
+  <script async type="text/javascript" src="index.js"></script>
+</head>
+<body>
+<div class="crm-modal-window">
+
+  <div class="crm-modal-window__block">
+    <button class="crm-modal-window--close" title="close pop-up window"></button>
+    <h3 class="crm-modal-window__title">Добавить ТОВАР</h3>
+    <div class="crm-modal-window__line"></div>
+
+    <form class="crm-modal-window__form" id="crm-modal-window__form" action="https://jsonplaceholder.typicode.com/posts"
+          method="POST" enctype="application/x-www-form-urlencoded">
+      <fieldset class="crm-modal-window__list">
+
+        <legend class="crm-modal-window__legend-naming">Наименование</legend>
+        <label class="crm-modal-window__item crm-modal-window__item--naming">
+          <input name="product-name" type="text" required="required">
+        </label>
+
+        <legend class="crm-modal-window__legend-category">Категория</legend>
+        <label class="crm-modal-window__item crm-modal-window__item--category">
+          <input name="category" type="text" required="required">
+        </label>
+
+        <legend class="crm-modal-window__legend-counter">Единицы измерения</legend>
+        <label class="crm-modal-window__item crm-modal-window__item--counter">
+          <select name="units" type="text" required="required">
+            <option value="kg">Килограммы (кг.)</option>
+            <option value="grams">Граммы (г.)</option>
+            <option value="piece">Штуки (шт.)</option>
+            <option value="pack">Упаковки (уп.)</option>
+            <option value="liters">Литры (л.)</option>
+          </select>
+        </label>
+
+        <legend class="crm-modal-window__legend-discount">Дисконт</legend>
+        <label class="crm-modal-window__item crm-modal-window__item--discount">
+          <input class="crm-modal-window--checkbox-style" name="discount-check" type="checkbox" value="Yes">
+          <input class="crm-modal-window__input--fit-size crm-modal-window__input--checked" name="discount-text"
+                 type="text">
+        </label>
+
+        <legend class="crm-modal-window__legend-description">Описание</legend>
+        <label class="crm-modal-window__item crm-modal-window__item--description">
+          <textarea class="crm-modal-window--textarea-big" name="description"
+                    form="crm-modal-window__form">
+            </textarea>
+        </label>
+
+        <legend class="crm-modal-window__legend-quantity">Количество</legend>
+        <label class="crm-modal-window__item crm-modal-window__item--quantity">
+          <input name="count" type="number" inputmode="numeric" required="required" min="1"
+                 oninput="validity.valid||(value='');">
+        </label>
+
+        <legend class="crm-modal-window__legend-price">Цена</legend>
+        <label class="crm-modal-window__item crm-modal-window__item--price">
+          <input name="price" type="number" inputmode="numeric" required="required" min="1"
+                 oninput="validity.valid||(value='');">
+        </label>
+
+      </fieldset>
+    </form>
+    <div class="crm-modal-window__footer">
+    <p class="crm-modal-window__totalPrice">Итоговая стоимость: <span>$ 900.00</span></p>
+    <button class="crm-modal-window__send-btn" type="submit" form="crm-modal-window__form">Добавить товар
+    </button>
+    </div>
+  </div>
+</div>
+</body>

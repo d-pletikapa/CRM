@@ -7,7 +7,7 @@
   <script async type="text/javascript" src="index.js"></script>
 </head>
 <body>
-<div class="crm-modal-window">
+<div class="crm-modal-window crm-modal-window--overlay">
 
   <div class="crm-modal-window__block">
     <button class="crm-modal-window--close" title="close pop-up window"></button>
@@ -18,18 +18,24 @@
           method="POST" enctype="application/x-www-form-urlencoded">
       <fieldset class="crm-modal-window__list">
 
-        <legend class="crm-modal-window__legend-naming">Наименование</legend>
+<!--        <span class="crm-modal-window__legend-naming">Наименование</span>-->
         <label class="crm-modal-window__item crm-modal-window__item--naming">
+          <span class="crm-modal-window__legend-naming">Наименование</span>
+
           <input name="product-name" type="text" required="required">
         </label>
 
-        <legend class="crm-modal-window__legend-category">Категория</legend>
+<!--        <span class="crm-modal-window__legend-category">Категория</span>-->
         <label class="crm-modal-window__item crm-modal-window__item--category">
+          <span class="crm-modal-window__legend-category">Категория</span>
+
           <input name="category" type="text" required="required">
         </label>
 
-        <legend class="crm-modal-window__legend-counter">Единицы измерения</legend>
+<!--        <span class="crm-modal-window__legend-counter">Единицы измерения</span>-->
         <label class="crm-modal-window__item crm-modal-window__item--counter">
+          <span class="crm-modal-window__legend-counter">Единицы измерения</span>
+
           <select name="units" type="text" required="required">
             <option value="kg">Килограммы (кг.)</option>
             <option value="grams">Граммы (г.)</option>
@@ -39,33 +45,41 @@
           </select>
         </label>
 
-        <legend class="crm-modal-window__legend-discount">Дисконт</legend>
+<!--        <span class="crm-modal-window__legend-discount">Дисконт</span>-->
         <label class="crm-modal-window__item crm-modal-window__item--discount">
+          <span class="crm-modal-window__legend-discount">Дисконт</span>
+
           <input class="crm-modal-window--checkbox-style" name="discount-check" type="checkbox" value="Yes">
           <input class="crm-modal-window__input--fit-size crm-modal-window__input--checked" name="discount-text"
                  type="text">
         </label>
 
-        <legend class="crm-modal-window__legend-description">Описание</legend>
+<!--        <span class="crm-modal-window__legend-description">Описание</span>-->
         <label class="crm-modal-window__item crm-modal-window__item--description">
+          <span class="crm-modal-window__legend-description">Описание</span>
+
           <textarea class="crm-modal-window--textarea-big" name="description"
                     form="crm-modal-window__form">
             </textarea>
         </label>
 
-        <legend class="crm-modal-window__legend-quantity">Количество</legend>
+<!--        <span class="crm-modal-window__legend-quantity">Количество</span>-->
         <label class="crm-modal-window__item crm-modal-window__item--quantity">
+          <span class="crm-modal-window__legend-quantity">Количество</span>
+
           <input name="count" type="number" inputmode="numeric" required="required" min="1"
                  oninput="validity.valid||(value='');">
         </label>
 
-        <legend class="crm-modal-window__legend-price">Цена</legend>
+<!--        <span class="crm-modal-window__legend-price">Цена</span>-->
         <label class="crm-modal-window__item crm-modal-window__item--price">
+          <span class="crm-modal-window__legend-price">Цена</span>
+
           <input name="price" type="number" inputmode="numeric" required="required" min="1"
                  oninput="validity.valid||(value='');">
         </label>
-
       </fieldset>
+
     </form>
     <div class="crm-modal-window__footer">
     <p class="crm-modal-window__totalPrice">Итоговая стоимость: <span>$ 900.00</span></p>

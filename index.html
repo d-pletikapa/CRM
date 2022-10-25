@@ -1,19 +1,325 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta charset="UTF-8">
-  <title>Cart</title>
-  <style>
-    object {
-      overflow: hidden;
-    }
-  </style>
+  <title>CRM</title>
+    <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="crm-modal.css">
+<!--  <script async type="text/javascript" src=""></script>-->
 </head>
 <body>
-<object type="text/html" data="crm.html" width="1920" height="1080"></object>
+
+<div class="crm-modal-window crm-modal-window--overlay">
+
+  <div class="crm-modal-window__block">
+    <button class="crm-modal-window--close" title="close pop-up window"></button>
+    <h3 class="crm-modal-window__title">Добавить ТОВАР</h3>
+    <div class="crm-modal-window__line"></div>
+
+    <form class="crm-modal-window__form" id="crm-modal-window__form" action="https://jsonplaceholder.typicode.com/posts"
+          method="POST" enctype="application/x-www-form-urlencoded">
+      <fieldset class="crm-modal-window__list">
+
+<!--        <span class="crm-modal-window__legend-naming">Наименование</span>-->
+        <label class="crm-modal-window__item crm-modal-window__item--naming">
+          <span class="crm-modal-window__legend-naming">Наименование</span>
+
+          <input name="product-name" type="text" required="required">
+        </label>
+
+<!--        <span class="crm-modal-window__legend-category">Категория</span>-->
+        <label class="crm-modal-window__item crm-modal-window__item--category">
+          <span class="crm-modal-window__legend-category">Категория</span>
+
+          <input name="category" type="text" required="required">
+        </label>
+
+<!--        <span class="crm-modal-window__legend-counter">Единицы измерения</span>-->
+        <label class="crm-modal-window__item crm-modal-window__item--counter">
+          <span class="crm-modal-window__legend-counter">Единицы измерения</span>
+
+          <select name="units" type="text" required="required">
+            <option value="kg">Килограммы (кг.)</option>
+            <option value="grams">Граммы (г.)</option>
+            <option value="piece">Штуки (шт.)</option>
+            <option value="pack">Упаковки (уп.)</option>
+            <option value="liters">Литры (л.)</option>
+          </select>
+        </label>
+
+<!--        <span class="crm-modal-window__legend-discount">Дисконт</span>-->
+        <label class="crm-modal-window__item crm-modal-window__item--discount">
+          <span class="crm-modal-window__legend-discount">Дисконт</span>
+
+          <input class="crm-modal-window--checkbox-style" name="discount-check" type="checkbox" value="Yes">
+          <input class="crm-modal-window__input--fit-size crm-modal-window__input--checked" name="discount-text"
+                 type="text">
+        </label>
+
+<!--        <span class="crm-modal-window__legend-description">Описание</span>-->
+        <label class="crm-modal-window__item crm-modal-window__item--description">
+          <span class="crm-modal-window__legend-description">Описание</span>
+
+          <textarea class="crm-modal-window--textarea-big" name="description"
+                    form="crm-modal-window__form">
+            </textarea>
+        </label>
+
+<!--        <span class="crm-modal-window__legend-quantity">Количество</span>-->
+        <label class="crm-modal-window__item crm-modal-window__item--quantity">
+          <span class="crm-modal-window__legend-quantity">Количество</span>
+
+          <input name="count" type="number" inputmode="numeric" required="required" min="1"
+                 oninput="validity.valid||(value='');">
+        </label>
+
+<!--        <span class="crm-modal-window__legend-price">Цена</span>-->
+        <label class="crm-modal-window__item crm-modal-window__item--price">
+          <span class="crm-modal-window__legend-price">Цена</span>
+
+          <input name="price" type="number" inputmode="numeric" required="required" min="1"
+                 oninput="validity.valid||(value='');">
+        </label>
+      </fieldset>
+
+    </form>
+    <div class="crm-modal-window__footer">
+    <p class="crm-modal-window__totalPrice">Итоговая стоимость: <span>$ 900.00</span></p>
+    <button class="crm-modal-window__send-btn" type="submit" form="crm-modal-window__form">Добавить товар
+    </button>
+    </div>
+  </div>
+</div>
+
+
+<main>
+<section class="crm">
+ <div class="container">
+
+     <div class="crm__header">
+        <h1 class="crm__title">CMS</h1>
+        <p class="crm__subtitle">Итоговая стоимость: <span>$ 900.00</span></p>
+     </div>
+
+     <div class="crm__separator"></div>
+
+     <div class="crm__table">
+
+         <div class="crm__table__top">
+             <div class="crm__table__top--wrapper">
+            <button class="crm__table__filter">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_1_62)">
+                        <path d="M12 12L20 4V0H0V4L8 12V20L12 16V12Z" fill="#8B83BA"/>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_1_62">
+                            <rect width="20" height="20" fill="white"/>
+                        </clipPath>
+                    </defs>
+                </svg>
+                <span>Фильтр</span>
+            </button>
+
+             <form class="crm__table__search-form" action="https://jsonplaceholder.typicode.com/posts" method="POST" enctype="application/x-www-form-urlencoded">
+                 <button class="crm__table__search-btn" type="submit" value="search">
+                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                         <path d="M13.4097 14.8822C11.7399 16.1799 9.63851 16.7922 7.53338 16.5942C5.42824 16.3963 3.47766 15.403 2.07881 13.8166C0.679961 12.2303 -0.0619809 10.1701 0.00405863 8.05565C0.0700982 5.94118 0.939153 3.9314 2.43427 2.43552C3.92939 0.939633 5.93814 0.0701341 8.05152 0.00406071C10.1649 -0.0620127 12.224 0.680308 13.8096 2.07987C15.3951 3.47944 16.3879 5.43102 16.5857 7.53723C16.7836 9.64345 16.1717 11.7459 14.8745 13.4166L19.6936 18.2201C20.1016 18.6267 20.1022 19.2872 19.695 19.6946C19.2878 20.1021 18.6273 20.1017 18.2204 19.6939L13.4201 14.8822H13.4097ZM8.31916 14.5495C9.13773 14.5495 9.94829 14.3882 10.7045 14.0748C11.4608 13.7614 12.148 13.302 12.7268 12.7229C13.3056 12.1438 13.7647 11.4563 14.078 10.6996C14.3913 9.94298 14.5525 9.13201 14.5525 8.31302C14.5525 7.49403 14.3913 6.68306 14.078 5.92641C13.7647 5.16976 13.3056 4.48225 12.7268 3.90314C12.148 3.32402 11.4608 2.86465 10.7045 2.55123C9.94829 2.23782 9.13773 2.07651 8.31916 2.07651C6.66598 2.07651 5.08051 2.73356 3.91153 3.90314C2.74256 5.07271 2.08583 6.659 2.08583 8.31302C2.08583 9.96705 2.74256 11.5533 3.91153 12.7229C5.08051 13.8925 6.66598 14.5495 8.31916 14.5495Z" fill="#8B83BA"/>
+                     </svg>
+                 </button>
+                 <label class="visually-hidden" for="crm__table__search-input">Поиск</label>
+                 <input class="crm__table__search-input" placeholder="Поиск по наименованию и категории" type="search" id="crm__table__search-input">
+             </form>
+             </div>
+
+             <button class="crm__table__add-product">Добавить товар</button>
+         </div>
+
+         <div class="crm__table__body">
+             <table class="crm__table__t">
+                 <thead>
+                 <tr>
+                     <th>ID</th>
+                     <th>Наименование</th>
+                     <th>Категория</th>
+                     <th>ед/изм</th>
+                     <th>количество</th>
+                     <th>цена</th>
+                     <th>ИТОГ</th>
+                     <th></th>
+                     <th></th>
+                     <th></th>
+                 </tr>
+                 </thead>
+                 <tbody>
+                 <tr>
+                     <td>246016548</td>
+                     <td>Навигационная система Soundmax</td>
+                     <td>Техника для дома</td>
+                     <td>шт</td>
+                     <td>5</td>
+                     <td>$100</td>
+                     <td>$500</td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--no-img">
+
+                     </button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--edit"></button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--del"></button></td>
+                 </tr>
+                 <tr>
+                     <td>937295527</td>
+                     <td>Настольная игра “На 4-х ногах”</td>
+                     <td>Настольные игры</td>
+                     <td>шт</td>
+                     <td>12</td>
+                     <td>$14</td>
+                     <td>$168</td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--img">
+
+                     </button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--edit"></button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--del"></button></td>
+                 </tr>
+                 <tr>
+                     <td>246016548</td>
+                     <td>Навигационная система Soundmax</td>
+                     <td>Техника для дома</td>
+                     <td>шт</td>
+                     <td>5</td>
+                     <td>$100</td>
+                     <td>$500</td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--img">
+
+                     </button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--edit"></button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--del"></button></td>
+                 </tr>
+                 <tr>
+                     <td>246016548</td>
+                     <td>Навигационная система Soundmax</td>
+                     <td>Техника для дома</td>
+                     <td>шт</td>
+                     <td>5</td>
+                     <td>$100</td>
+                     <td>$500</td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--img">
+
+                     </button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--edit"></button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--del"></button></td>
+                 </tr>
+                 <tr>
+                     <td>246016548</td>
+                     <td>Навигационная система Soundmax</td>
+                     <td>Техника для дома</td>
+                     <td>шт</td>
+                     <td>5</td>
+                     <td>$100</td>
+                     <td>$500</td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--img">
+
+                     </button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--edit"></button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--del"></button></td>
+                 </tr>
+                 <tr>
+                     <td>246016548</td>
+                     <td>Навигационная система Soundmax</td>
+                     <td>Техника для дома</td>
+                     <td>шт</td>
+                     <td>5</td>
+                     <td>$100</td>
+                     <td>$500</td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--img">
+
+                     </button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--edit"></button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--del"></button></td>
+                 </tr>
+                 <tr>
+                     <td>246016548</td>
+                     <td>Навигационная система Soundmax</td>
+                     <td>Техника для дома</td>
+                     <td>шт</td>
+                     <td>5</td>
+                     <td>$100</td>
+                     <td>$500</td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--img">
+
+                     </button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--edit"></button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--del"></button></td>
+                 </tr>
+                 <tr>
+                     <td>246016548</td>
+                     <td>Навигационная система Soundmax</td>
+                     <td>Техника для дома</td>
+                     <td>шт</td>
+                     <td>5</td>
+                     <td>$100</td>
+                     <td>$500</td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--img">
+
+                     </button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--edit"></button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--del"></button></td>
+                 </tr>
+                 <tr>
+                     <td>246016548</td>
+                     <td>Навигационная система Soundmax</td>
+                     <td>Техника для дома</td>
+                     <td>шт</td>
+                     <td>5</td>
+                     <td>$100</td>
+                     <td>$500</td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--img">
+
+                     </button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--edit"></button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--del"></button></td>
+                 </tr>
+                 <tr>
+                     <td>246016548</td>
+                     <td>Навигационная система Soundmax</td>
+                     <td>Техника для дома</td>
+                     <td>шт</td>
+                     <td>5</td>
+                     <td>$100</td>
+                     <td>$500</td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--img">
+
+                     </button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--edit"></button></td>
+                     <td><button class="crm__table__prod-btn crm__table__prod-btn--del"></button></td>
+                 </tr>
+                 </tbody>
+             </table>
+
+         </div>
+
+         <div class="crm__table__bottom">
+             <label class="crm__table__product-view">Показывать на странице:
+                 <select name="strings-to-show" type="text" required="required">
+                     <option value="10p">10</option>
+                     <option value="20p">20</option>
+                     <option value="30p">30</option>
+                     <option value="40p">40</option>
+                     <option value="50p">50</option>
+                 </select>
+             </label>
+             <p class="crm__table__product-view--text">1-10 of 276</p>
+             <button class="crm__table__pagination--left"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <path d="M5.79971 1.10636C6.42812 0.51287 5.43313 -0.426818 4.80472 0.216126L0.196378 4.51891C-0.0654595 4.7662 -0.0654595 5.21131 0.196378 5.4586L4.80472 9.81084C5.43313 10.4043 6.42812 9.46464 5.79971 8.87115L1.71504 5.01348L5.79971 1.10636Z" fill="#6E6893"/>
+             </svg>
+             </button>
+             <button class="crm__table__pagination--right"><svg width="6" height="10" viewBox="0 0 6 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <path d="M0.200293 1.10636C-0.428118 0.51287 0.566865 -0.426818 1.19528 0.216126L5.80362 4.51891C6.06546 4.7662 6.06546 5.21131 5.80362 5.4586L1.19528 9.81084C0.566865 10.4043 -0.428118 9.46464 0.200293 8.87115L4.28496 5.01348L0.200293 1.10636Z" fill="#6E6893"/>
+             </svg>
+             </button>
+         </div>
+     </div>
+
+ </div>
+</section>
+</main>
 </body>
-</html>

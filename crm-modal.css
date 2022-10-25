@@ -1,16 +1,29 @@
-@import url(normalize.css);
-@import url(global-style.css);
+/* Модальное окно */
+/* Модальное окно */
+/* Модальное окно */
+/* Модальное окно */
+
+.crm-modal-window--overlay{
+  /*display: none;*/
+  position: absolute;
+  z-index: 100;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+}
 
 .crm-modal-window {
-  padding: 5em 0;
+  margin: 0 auto;
 }
 
 .crm-modal-window__block {
   position: relative;
-  width: 792px;
+  max-width: 792px;
   min-height: 613px;
   margin: 0 auto;
-  background-color: #F2F0F9;
+  /*background-color: #F2F0F9;*/
+  background-color: transparent;
   padding: 32px 106px 28px 106px;
 }
 
@@ -111,8 +124,6 @@
     grid-area: crm-modal-window__item--price;
   }
 
-
-
 .crm-modal-window__item:last-child {
   margin-bottom: 0;
 }
@@ -151,6 +162,7 @@
 
 .crm-modal-window__item input:not(.crm-modal-window--checkbox-style,.crm-modal-window__input--fit-size), .crm-modal-window__item select, .crm-modal-window__item textarea {
   min-width: 250px;
+  width: 100%;
 }
 
 .crm-modal-window__item .crm-modal-window--checkbox-style {
@@ -194,7 +206,6 @@
   opacity: 0;
   transform: rotate(-45deg);
 }
-
 
 /* Класс для отключения при нажатии чекбокса селекторы :checked + ~ */
 .crm-modal-window--checkbox-style:checked + .crm-modal-window__input--checked {
@@ -248,8 +259,6 @@
 
 .crm-modal-window__send-btn {
   position: relative;
-  /*top: 0;*/
-  /*left: 352px;*/
   width: 200px;
   height: 39px;
   color: #FFFFFF;
@@ -261,7 +270,6 @@
   border-radius: 6px;
 }
 
-
 .crm-modal-window--close:before {
   position: absolute;
   content: url("img/cross.svg");
@@ -271,12 +279,21 @@
   right: 30px;
 }
 
-/*.crm-modal-window--close {*/
-/*  box-sizing: border-box;*/
-/*  position: absolute;*/
-/*  background: center/ contain no-repeat url("img/cross.svg");*/
-/*  width: 24px;*/
-/*  height: 24px;*/
-/*  top: 20px;*/
-/*  right: 30px;*/
-/*}*/
+
+@media (max-width: 1024px) {
+  .crm-modal-window {
+
+  }
+
+  .crm-modal-window__list {
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+  }
+  .crm-modal-window__footer {
+    row-gap: 20px;
+  }
+  .crm-modal-window__block {
+    width: 100%;
+  }
+}

@@ -4,13 +4,16 @@
 /* Модальное окно */
 
 .crm-modal-window--overlay{
-  /*display: none;*/
+  display: none;
   position: absolute;
   z-index: 100;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
 
+.crm-modal-window--visible {
+  display: flex;
 }
 
 .crm-modal-window {

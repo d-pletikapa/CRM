@@ -5,10 +5,13 @@
 
 .crm-modal-window--overlay{
   display: none;
+  width: 100%;
+  height: 100%;
   position: absolute;
   z-index: 100;
   left: 50%;
   top: 50%;
+  background-color: rgba(242, 240, 249, 0.8);
   transform: translate(-50%, -50%);
 }
 
@@ -29,6 +32,12 @@
   background-color: transparent;
   padding: 32px 106px 28px 106px;
 }
+.crm-modal-window__title-block {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+  justify-content: space-between;
+}
 
 .crm-modal-window__title {
   font-size: 24px;
@@ -37,6 +46,16 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 21px;
+}
+
+.crm-modal-window__product-id{
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 12px;
+  text-transform: uppercase;
+  color: #C5C5C5;
+  /*align-self: center;*/
+
 }
 
 .crm-modal-window__line {

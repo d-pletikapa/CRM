@@ -1,7 +1,6 @@
 @import url(normalize.css);
 @import url(global-style.css);
 
-
 .crm {
     padding-top: 80px;
     padding-bottom: 110px;
@@ -207,25 +206,25 @@
 }
 
 .crm__table__prod-btn--no-img {
-    background-image: url("img/carbon_no-image.svg");
+    background-image: url("../img/carbon_no-image.svg");
     background-repeat: no-repeat;
     background-color: transparent;
 }
 
 .crm__table__prod-btn--img {
-    background-image: url("img/carbon_image.svg");
+    background-image: url("../img/carbon_image.svg");
     background-repeat: no-repeat;
     background-color: transparent;
 }
 
 .crm__table__prod-btn--edit {
-    background-image: url("img/akar-icons_edit.svg");
+    background-image: url("../img/akar-icons_edit.svg");
     background-repeat: no-repeat;
     background-color: transparent;
 }
 
 .crm__table__prod-btn--del {
-    background-image: url("img/ant-design_delete-outlined.svg");
+    background-image: url("../img/ant-design_delete-outlined.svg");
     background-repeat: no-repeat;
     background-color: transparent;
 }
@@ -254,31 +253,3 @@
 .crm__table__bottom button{
     background-color: transparent;
 }
-
-
-/*@media (max-width: 975px) {*/
-/*    .crm__table__top {*/
-/*        !*display: grid;*!*/
-/*        justify-content: space-evenly;*/
-/*        grid-template-columns: auto;*/
-/*        grid-template-rows: 1fr 1fr;*/
-/*     }*/
-
-/*    .crm__table__top--wrapper {*/
-/*        flex-flow: column wrap;*/
-/*        width: 100%;*/
-/*        row-gap: 15px;*/
-/*        grid-column: 1 / 2;*/
-/*        grid-row: 1 / 2;*/
-/*    }*/
-
-/*    .crm__table__add-product {*/
-/*        grid-column: 1 / 2;*/
-/*        grid-row: 2 / 3;*/
-/*    }*/
-
-/*}*/
-
-
-
-

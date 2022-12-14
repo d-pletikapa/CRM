@@ -294,7 +294,7 @@
 
 .crm-modal-window--close:before {
   position: absolute;
-  content: url("img/cross.svg");
+  content: url("../img/cross.svg");
   width: 20px;
   height: 20px;
   top: 20px;

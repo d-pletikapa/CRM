@@ -46,3 +46,24 @@ const renderGoods = (arrayObj) => {
   )
 }
 renderGoods(goods);
+
+const removeGoods = (dataId) => {
+  goods.forEach((item, index,array) => {
+    if (item.id === +dataId) {
+      array.splice(index, 1);
+    }
+  })
+  return goods;
+}
+
+const table = document.querySelector('.crm__table__t');
+table.addEventListener('click', e => {
+  const target = e.target;
+  if (target === target.closest('.crm__table__prod-btn--del')) {
+    const closestRow = target.closest('tr');
+    const rowProductId = +closestRow.firstElementChild.textContent;
+    closestRow.remove();
+    removeGoods(rowProductId);
+    console.log(goods);
+  }
+})

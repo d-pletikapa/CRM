@@ -1,5 +1,5 @@
-@import url(normalize.css);
-@import url(global-style.css);
+@import url(../css/normalize.css);
+@import url(../css/global-style.css);
 
 .crm {
     padding-top: 80px;

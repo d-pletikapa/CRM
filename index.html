@@ -5,8 +5,7 @@
   <title>CRM</title>
   <link rel="stylesheet" href="crm/index.css">
   <link rel="stylesheet" href="crm__modal/crm__modal.css">
-  <script type="module" defer src="crm/index.js"></script>
-<!--  <script type="module" defer src="https://gist.github.com/maksim-leskin/2827eca659ab5512c1e6a4b47619dfa8.js"></script>-->
+  <script type="" defer src="crm/index.js"></script>
   <script type="module" defer src="crm__modal/crm__modal.js"></script>
 </head>
 <body>
@@ -17,7 +16,7 @@
     <button class="crm-modal-window--close" title="close pop-up window"></button>
     <div class="crm-modal-window__title-block">
     <h3 class="crm-modal-window__title">Добавить ТОВАР</h3>
-    <p class="crm-modal-window__product-id">id: 201910241</p>
+    <span class="crm-modal-window__vendor-code__id">id: 000000000</span>
     </div>
     <div class="crm-modal-window__line"></div>
     <form class="crm-modal-window__form" id="crm-modal-window__form" action="https://jsonplaceholder.typicode.com/posts"
@@ -42,12 +41,13 @@
         <label class="crm-modal-window__item crm-modal-window__item--counter">
           <span class="crm-modal-window__legend-counter">Единицы измерения</span>
 
-          <select name="units" type="text" required="required">
-            <option value="kg">Килограммы (кг.)</option>
-            <option value="grams">Граммы (г.)</option>
-            <option value="piece">Штуки (шт.)</option>
-            <option value="pack">Упаковки (уп.)</option>
-            <option value="liters">Литры (л.)</option>
+          <select name="units" type="text" required>
+            <option value="">Выбрать...</option>
+            <option value="кг.">Килограммы (кг.)</option>
+            <option value="г.">Граммы (г.)</option>
+            <option value="шт.">Штуки (шт.)</option>
+            <option value="уп.">Упаковки (уп.)</option>
+            <option value="л.">Литры (л.)</option>
           </select>
         </label>
 
@@ -55,9 +55,8 @@
         <label class="crm-modal-window__item crm-modal-window__item--discount">
           <span class="crm-modal-window__legend-discount">Дисконт</span>
 
-          <input class="crm-modal-window--checkbox-style" name="discount-check" type="checkbox" value="Yes">
-          <input class="crm-modal-window__input--fit-size crm-modal-window__input--checked" name="discount-text"
-                 type="text">
+          <input class="crm-modal-window--checkbox-style" name="discountCheck" type="checkbox" value="No">
+          <input class="crm-modal-window__input--fit-size crm-modal-window__input--checked" name="discountText" type="text" disabled required>
         </label>
 
 <!--        <span class="crm-modal-window__legend-description">Описание</span>-->
@@ -65,15 +64,14 @@
           <span class="crm-modal-window__legend-description">Описание</span>
 
           <textarea class="crm-modal-window--textarea-big" name="description"
-                    form="crm-modal-window__form">
-            </textarea>
+                    form="crm-modal-window__form" required></textarea>
         </label>
 
 <!--        <span class="crm-modal-window__legend-quantity">Количество</span>-->
         <label class="crm-modal-window__item crm-modal-window__item--quantity">
           <span class="crm-modal-window__legend-quantity">Количество</span>
 
-          <input name="count" type="number" inputmode="numeric" required="required" min="1"
+          <input name="count" type="number" inputmode="numeric" required min="1"
                  oninput="validity.valid||(value='');">
         </label>
 
@@ -84,11 +82,17 @@
           <input name="price" type="number" inputmode="numeric" required="required" min="1"
                  oninput="validity.valid||(value='');">
         </label>
+
+        <label class="crm-modal-window__item crm-modal-window__item--image crm-modal-window__legend-image">Добавить изображение
+<!--          <button class="crm-modal-window__legend-image" type="button"></button>-->
+          <input name="image" type="file" accept="image/png, image/jpeg">
+        </label>
+
       </fieldset>
 
     </form>
     <div class="crm-modal-window__footer">
-    <p class="crm-modal-window__totalPrice">Итоговая стоимость: <span>$ 900.00</span></p>
+    <p class="crm-modal-window__totalPrice">Итоговая стоимость: <span>$ 0.00</span></p>
     <button class="crm-modal-window__send-btn" type="submit" form="crm-modal-window__form">Добавить товар
     </button>
     </div>
@@ -102,7 +106,7 @@
 
      <div class="crm__header">
         <h1 class="crm__title">CMS</h1>
-        <p class="crm__subtitle">Итоговая стоимость: <span>$ 900.00</span></p>
+        <p class="crm__subtitle">Итоговая стоимость: <span>$ 0.00</span></p>
      </div>
 
      <div class="crm__separator"></div>
@@ -136,7 +140,7 @@
              </form>
              </div>
 
-             <button class="crm__table__add-product">Добавить товар</button>
+             <button class="crm__table__add-product" type="submit">Добавить товар</button>
          </div>
 
          <div class="crm__table__body">

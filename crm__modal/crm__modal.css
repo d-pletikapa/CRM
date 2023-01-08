@@ -54,7 +54,7 @@
   margin-bottom: 21px;
 }
 
-.crm-modal-window__product-id{
+.crm-modal-window__vendor-code__id{
   font-weight: 600;
   font-size: 10px;
   line-height: 12px;
@@ -95,7 +95,9 @@
   "crm-modal-window__legend-counter crm-modal-window__legend-quantity"
   "crm-modal-window__item--counter crm-modal-window__item--quantity"
   "crm-modal-window__legend-discount crm-modal-window__legend-price"
-  "crm-modal-window__item--discount crm-modal-window__item--price";
+  "crm-modal-window__item--discount crm-modal-window__item--price"
+  ". crm-modal-window__legend-image"
+  ". crm-modal-window__item--image";
 
   justify-content: space-between;
   column-gap: 24px;
@@ -151,6 +153,12 @@
   .crm-modal-window__item--price {
     grid-area: crm-modal-window__item--price;
   }
+  .crm-modal-window__legend-image {
+    grid-area: crm-modal-window__legend-image;
+  }
+  .crm-modal-window__item--image {
+    grid-area: crm-modal-window__item--image;
+  }
 
 .crm-modal-window__item:last-child {
   margin-bottom: 0;
@@ -174,6 +182,10 @@
   border-radius: 6px;
   margin-bottom: 12px;
 }
+.crm-modal-window__item input:last-child {
+  margin-bottom: 32px;
+}
+
 
 .crm-modal-window__item input:nth-child(2n), .crm-modal-window__item select, .crm-modal-window__item textarea {
   background: #F4F2FF;
@@ -191,6 +203,30 @@
 .crm-modal-window__item input:not(.crm-modal-window--checkbox-style,.crm-modal-window__input--fit-size), .crm-modal-window__item select, .crm-modal-window__item textarea {
   min-width: 250px;
   width: 100%;
+}
+
+/*Стилизация file input*/
+.crm-modal-window__item--image input {
+  display: none;
+}
+
+.crm-modal-window__item--image input::file-selector-button,
+.crm-modal-window__legend-image {
+  width: 250px;
+  height: 39px;
+  background: #6D5BD0;
+  border-radius: 6px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  cursor: pointer;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  text-transform: uppercase;
+  color: #FFFFFF;
 }
 
 .crm-modal-window__item .crm-modal-window--checkbox-style {

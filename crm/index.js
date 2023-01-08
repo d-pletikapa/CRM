@@ -2,12 +2,12 @@
 // 2. Создайте функцию renderGoods, принимает один параметр массив с объектами
 // Функция renderGoods перебирает массив и вставляет строки, созданные на основе createRow, в таблицу (советую использовать метод map)
 
-const goods = [
+export const goods = [
   {
     "id": 253842678,
     "title": "Смартфон Xiaomi 11T 8/128GB",
     "category": "mobile-phone",
-    "units": "шт",
+    "units": "шт.",
     "count": 3,
     "price": 27000,
   },
@@ -16,10 +16,10 @@ const goods = [
     "title": "Радиоуправляемый автомобиль Cheetan",
     "category": "toys",
     "price": 4000,
-    "units": "шт",
+    "units": "шт.",
     "count": 1,
   },
-]
+];
 
 const createRow = (obj) => {
   const tableBody = document.querySelector('.crm__table__t tbody');
@@ -29,8 +29,8 @@ const createRow = (obj) => {
                      <td>${obj.category}</td>
                      <td>${obj.units}</td>
                      <td>${obj.count}</td>
-                     <td>$${obj.price}</td>
-                     <td>$${obj.price * obj.count}</td>
+                     <td>${obj.price}</td>
+                     <td>${obj.price * obj.count}</td>
                      <td><button class="crm__table__prod-btn crm__table__prod-btn--img">
                      </button></td>
                      <td><button class="crm__table__prod-btn crm__table__prod-btn--edit"></button></td>
@@ -52,8 +52,13 @@ const removeGoods = (dataId) => {
     if (item.id === +dataId) {
       array.splice(index, 1);
     }
+    renderCrmPrice();
   })
   return goods;
+}
+
+export const renderNewProduct = () => {
+  createRow(goods[goods.length -1]); // для рендера берется последний объект массива
 }
 
 const table = document.querySelector('.crm__table__t');
@@ -67,3 +72,23 @@ table.addEventListener('click', e => {
     console.log(goods);
   }
 })
+
+// 7. Итоговая стоимость в модальном окне должна правильно высчитываться при смене фокуса
+export const getTotalPrice = () => {
+  let totalPrice = 0;
+  for (const obj of goods) {
+    totalPrice += (obj.price * obj.count);
+  }
+  return totalPrice;
+}
+
+// 8. Итоговая стоимость над таблицей должна корректно отображать сумму всех товаров
+const crmSubtitlePrice = document.querySelector('.crm__subtitle');
+export const renderCrmPrice = () => {
+  crmSubtitlePrice.children[0].innerText = `$ ${getTotalPrice()}`;
+}
+renderCrmPrice();
+
+
+
+

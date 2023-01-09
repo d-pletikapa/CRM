@@ -1,6 +1,6 @@
-import {goods, renderCrmPrice} from '/crm/index.js';
-import {renderNewProduct} from '/crm/index.js';
-import {getTotalPrice} from '/crm/index.js';
+import {goods, renderCrmPrice} from '/js/index.js';
+import {renderNewProduct} from '/js/index.js';
+import {getTotalPrice} from '/js/index.js';
 
 const modalWindowTitle = document.querySelector('.crm-modal-window__title');
 const modalWindowProductId = document.querySelector('.crm-modal-window__vendor-code__id');
@@ -35,6 +35,13 @@ modalWindowOverlay.addEventListener('click', e => {
     closeModal();
   }
 });
+
+document.addEventListener('keydown', e => {
+  if (e.code === 'Escape') {
+    closeModal(); //закрываем модальное окно на кнопку esc
+  }
+});
+
 // 5-07
 // 1. В форме если поставить чекбокс то поле рядом должно быть разблокировано
 // 2. Если чекбокс убрать поле рядом очищается и блокируется

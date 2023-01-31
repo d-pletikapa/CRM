@@ -11,19 +11,32 @@ import {getTotalPrice} from './controlCrm.js';
 // объект и на основе объекта формировать элемент <tr> с <td> внутри
 const createRow = (obj) => {
   const tableBody = document.querySelector('.crm__table__t tbody');
-  tableBody.insertAdjacentHTML('beforeend', `<tr>
-                     <td>${obj.id}</td>
-                     <td>${obj.title}</td>
-                     <td>${obj.category}</td>
-                     <td>${obj.units}</td>
-                     <td>${obj.count}</td>
-                     <td>${obj.price}</td>
-                     <td>${obj.price * obj.count}</td>
-                     <td><button class="crm__table__prod-btn crm__table__prod-btn--img">
-                     </button></td>
-                     <td><button class="crm__table__prod-btn crm__table__prod-btn--edit"></button></td>
-                     <td><button class="crm__table__prod-btn crm__table__prod-btn--del"></button></td>
-                 </tr>`,
+  tableBody.insertAdjacentHTML('beforeend', `
+    <tr>
+       <td>${obj.id}</td>
+       <td>${obj.title}</td>
+       <td>${obj.category}</td>
+       <td>${obj.units}</td>
+       <td>${obj.count}</td>
+       <td>${obj.price}</td>
+       <td>${obj.price * obj.count}</td>
+       <td>
+         <button type="button"
+         class="crm__table__prod-btn crm__table__prod-btn--img"
+         data-pic="../img/prodCover.jpg">
+         </button>
+       </td>
+       <td>
+         <button type="button"
+         class="crm__table__prod-btn crm__table__prod-btn--edit">
+         </button>
+       </td>
+       <td>
+         <button type="button"
+         class="crm__table__prod-btn crm__table__prod-btn--del">
+         </button>
+       </td>
+    </tr>`,
   );
 };
 

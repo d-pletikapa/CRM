@@ -134,6 +134,19 @@ table.addEventListener('click', e => {
   if (target === target.closest('.crm__table__prod-btn--del')) {
     const closestRow = target.closest('tr');
     removeGoods(removeTableRow(closestRow));
+  } else if (target === target.closest('.crm__table__prod-btn--img')) {
+    const thisBtnPreview = target.closest('.crm__table__prod-btn--img');
+    const prodPreviewWindow = open(
+        'about:blank',
+        '',
+        `popup, width=600, height=600,
+         top=${(screen.height / 2) - 300},
+         left=${(screen.width / 2) - 300}`);
+
+    prodPreviewWindow.document.body.style.backgroundImage =
+      `url('${thisBtnPreview.dataset.pic}')`;
+    prodPreviewWindow.document.body.innerHTML =
+      `<img src="../img/123.svg" alt="prod-preview">`;
   }
 });
 

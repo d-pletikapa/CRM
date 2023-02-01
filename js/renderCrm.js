@@ -21,9 +21,7 @@ const createRow = (obj) => {
        <td>${obj.price}</td>
        <td>${obj.price * obj.count}</td>
        <td>
-         <button type="button"
-         class="crm__table__prod-btn crm__table__prod-btn--img"
-         data-pic="../img/prodCover.jpg">
+         <button type="button" class="crm__table__prod-btn crm__table__prod-btn--img" data-pic="./img/prodCover.jpg">
          </button>
        </td>
        <td>

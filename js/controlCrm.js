@@ -145,8 +145,10 @@ table.addEventListener('click', e => {
 
     prodPreviewWindow.document.body.style.backgroundImage =
       `url(${thisBtnPreview.dataset.pic})`;
-    // prodPreviewWindow.document.body.innerHTML =
-    //   `<img src="${thisBtnPreview.dataset.pic}" alt="prod-preview">`;
+    console.log(thisBtnPreview.dataset.pic);
+    prodPreviewWindow.document.body.innerHTML =
+      `<img src="${thisBtnPreview.dataset.pic}" alt="prod-preview">`;
+    // style="background-image: url(./img/prodCover.jpg);"
   }
 });
 

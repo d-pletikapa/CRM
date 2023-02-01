@@ -148,6 +148,8 @@ table.addEventListener('click', e => {
     console.log(thisBtnPreview.dataset.pic);
     prodPreviewWindow.document.body.innerHTML =
       `<img src="${thisBtnPreview.dataset.pic}" alt="prod-preview">`;
+    prodPreviewWindow.document.body.innerHTML =
+      `<img src="/img/prodCover.jpg" alt="prod-preview">`;
     // style="background-image: url(./img/prodCover.jpg);"
   }
 });

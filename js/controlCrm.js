@@ -146,7 +146,7 @@ table.addEventListener('click', e => {
     prodPreviewWindow.document.body.style.backgroundImage =
       `url('${thisBtnPreview.dataset.pic}')`;
     prodPreviewWindow.document.body.innerHTML =
-      `<img src="../img/123.svg" alt="prod-preview">`;
+      `<img src="../img/prodCover.jpg" alt="prod-preview">`;
   }
 });
 

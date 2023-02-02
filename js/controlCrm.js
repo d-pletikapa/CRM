@@ -129,6 +129,28 @@ modalWindowForm.addEventListener('submit', e => {
 });
 
 // delete row
+const createPopupCoverWindow = (thisBtnPreview) => {
+  const prodPreviewWindow = open(
+      'about:blank',
+      '',
+      `popup, width=600, height=600,
+         top=${screen.height / 2 - 300},
+         left=${screen.width / 2 - 300}`);
+
+  // const img = document.createElement('img');
+  // img.setAttribute('src', `${thisBtnPreview.dataset.pic}`);
+  // img.setAttribute('alt', `prod-preview`);
+  // img.setAttribute('width', `600px`);
+  // img.setAttribute('height', `600px`);
+  // prodPreviewWindow.document.body.append(img);
+
+  prodPreviewWindow.document.body.style.backgroundImage =
+    `url(http://localhost:63342/JS-4-00${thisBtnPreview.dataset.pic})`;
+
+  // prodPreviewWindow.document.body.innerHTML =
+  //   `<img src="http://localhost:63342/JS-4-00${thisBtnPreview.dataset.pic}" alt="prod-preview">`;
+  console.log(thisBtnPreview.dataset.pic);
+};
 table.addEventListener('click', e => {
   const target = e.target;
   if (target === target.closest('.crm__table__prod-btn--del')) {
@@ -136,21 +158,7 @@ table.addEventListener('click', e => {
     removeGoods(removeTableRow(closestRow));
   } else if (target === target.closest('.crm__table__prod-btn--img')) {
     const thisBtnPreview = target.closest('.crm__table__prod-btn--img');
-    const prodPreviewWindow = open(
-        'about:blank',
-        '',
-        `popup, width=600, height=600,
-         top=${(screen.height / 2) - 300},
-         left=${(screen.width / 2) - 300}`);
-
-    prodPreviewWindow.document.body.style.backgroundImage =
-      `url(${thisBtnPreview.dataset.pic})`;
-    console.log(thisBtnPreview.dataset.pic);
-    prodPreviewWindow.document.body.innerHTML =
-      `<img src="${thisBtnPreview.dataset.pic}" alt="prod-preview">`;
-    prodPreviewWindow.document.body.innerHTML =
-      `<img src="./img/prodCover.jpg" alt="prod-preview">`;
-    // style="background-image: url(./img/prodCover.jpg);"
+    createPopupCoverWindow(thisBtnPreview);
   }
 });
 

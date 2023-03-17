@@ -3,7 +3,6 @@ import pageElements from './getPageData.js';
 const {
 	crmSubtitlePrice,
 	modalWindowProductId,
-	modalWindowTotalPrice,
 } = pageElements;
 import { getTotalPrice } from './controlCrm.js';
 
@@ -77,7 +76,6 @@ export const removeGoods = (dataId) => {
 };
 
 export const renderNewProduct = async (newProduct) => {
-	// для рендера берется последний объект массива
 	createRow(await newProduct);
 	console.log(newProduct);
 };
@@ -91,13 +89,4 @@ export const removeTableRow = (closestRow) => {
 export const renderNewId = (id) => {
 	modalWindowProductId.innerText = `id: ${id}`;
 };
-// 7. Итоговая стоимость в модальном окне
-// должна правильно высчитываться при смене фокуса
-export const renderFormPrice = async () => {
-	const totalPrice = await
-		fetchGoods(URL, {
-			method: 'get',
-			callback: getTotalPrice,
-		});
-	modalWindowTotalPrice.children[0].innerText = `$ ${totalPrice}`;
-};
+

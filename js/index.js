@@ -1,12 +1,9 @@
-import { URL, fetchGoods } from './getGoods.js';
-import { renderCrmPrice, renderGoods } from './renderCrm.js';
+import { loadProdList } from './getGoods.js';
+import { renderCrmPrice } from './renderCrm.js';
 import './renderModal.js';
 {
 	const init = () => {
-		fetchGoods(URL, {
-			method: 'get',
-			callback: renderGoods,
-		});
+		loadProdList();
 		// renderGoods(goods);
 		renderCrmPrice();
 	};

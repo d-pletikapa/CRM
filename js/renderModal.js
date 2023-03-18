@@ -1,4 +1,4 @@
-import { launchModalEvents } from './controlModal.js';
+import { launchModalEvents, formPriceControl } from './controlModal.js';
 const styles = new Map();
 const loadStyles = (url) => {
 	if (styles.has(url)) {
@@ -138,7 +138,6 @@ export const renderModal = async () => {
 	`);
 	// crm - modal - window--visible
 	document.body.prepend(modal);
-	modal.addEventListener('load', () => {
-		launchModalEvents();
-	})
+	formPriceControl();
+	launchModalEvents();
 };

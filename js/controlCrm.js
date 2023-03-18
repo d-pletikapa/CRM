@@ -1,10 +1,8 @@
 import pageElements from './getPageData.js';
-const { modalWindowTotalPrice, table, btnAddProduct, } = pageElements;
+const { modalWindowTotalPrice, table, btnAddProduct } = pageElements;
 import { removeTableRow } from './renderCrm.js';
 import { URL, fetchGoods } from './getGoods.js';
 import { renderModal } from './renderModal.js';
-import controlModal from './controlModal.js';
-const { renderFormPrice, launchModalEvents } = controlModal;
 
 export const debounce = (func, timeout = 300) => {
 	let timer;
@@ -83,6 +81,17 @@ btnAddProduct.addEventListener('click', () => {
 	// tempId.createNewId();
 	// renderNewId(tempId.value);
 	// modalWindowOverlay.classList.remove('crm-modal-window--visible');
-	launchModalEvents(renderModal());
-	renderFormPrice();
+	renderModal();
 });
+
+export const setEventsAllEditBtns = () => {
+	const editBtns = document.querySelectorAll(
+		'.crm__table__prod-btn--edit');
+
+	[...editBtns].forEach(item => {
+		item.addEventListener('click', () => {
+			console.log(123)
+			renderModal();
+		});
+	});
+};

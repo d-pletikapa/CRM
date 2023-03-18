@@ -16,6 +16,10 @@
 // 		'count': 1,
 // 	},
 // ];
+import { renderGoods } from './renderCrm.js';
+import { setEventsAllEditBtns } from './controlCrm.js';
+
+
 export const URL = 'https://adventurous-fifth-hedge.glitch.me/api/goods';
 export const fetchGoods = async (url, {
 	method = 'get',
@@ -43,6 +47,14 @@ export const fetchGoods = async (url, {
 	} catch (err) {
 		callback(err);
 	}
-}
+};
 
-
+export const loadProdList = async () => {
+	const checkLoad = await fetchGoods(URL, {
+		method: 'get',
+		callback: renderGoods,
+	});
+	if (checkLoad) {
+		setEventsAllEditBtns();
+	}
+};

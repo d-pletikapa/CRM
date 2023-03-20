@@ -42,7 +42,7 @@ export const formPriceControl = () => {
 
 
 //EVENTS
-export const launchModalEvents = () => {
+export const launchModalEvents = (editProdId) => {
 	const modalWindowForm = document.querySelector(
 		'.crm-modal-window__form');
 	const modalWindowCheckbox = document.querySelector(
@@ -74,11 +74,23 @@ export const launchModalEvents = () => {
 		return newProduct;
 	};
 
-	const sendAndRenderProd = (formData) => {
-		renderNewProduct(fetchGoods(URL,
+	const sendAndRenderProd = (formData, id) => {
+		let method = 'POST';
+		let body = createNewProduct(formData);
+		let url = URL;
+		let replace = false;
+
+		if (id) {
+			method = 'PATCH';
+			body = JSON.stringify(createNewProduct(formData));
+			url = `${URL}/${id}`;
+			replace = true;
+		}
+
+		renderNewProduct(fetchGoods(url,
 			{
-				method: 'POST',
-				body: createNewProduct(formData),
+				method: method,
+				body: body,
 				callback(err, data) {
 					if (err) {
 						modalWindowForm.append(createModalErr(err));
@@ -100,7 +112,7 @@ export const launchModalEvents = () => {
 					'Content-Type': 'application/json',
 				}
 			}
-		));
+		), replace, id);
 	}
 
 	document.addEventListener('keydown', e => {
@@ -131,11 +143,10 @@ export const launchModalEvents = () => {
 		}
 	});
 
-	// Реализовать добавление нового товара из формы в таблицу 2
 	modalWindowForm.addEventListener('submit', e => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
-		sendAndRenderProd(formData);
+		sendAndRenderProd(formData, editProdId);
 		renderCrmPrice();
 	});
 

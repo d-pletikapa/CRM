@@ -89,9 +89,11 @@ export const setEventsAllEditBtns = () => {
 		'.crm__table__prod-btn--edit');
 
 	[...editBtns].forEach(item => {
-		item.addEventListener('click', () => {
+		item.addEventListener('click', ({ target }) => {
+			const closestRow = target.closest('tr');
+			const rowProductId = +closestRow.firstElementChild.textContent;
 			console.log(123)
-			renderModal();
+			renderModal(rowProductId);
 		});
 	});
 };

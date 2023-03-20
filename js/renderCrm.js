@@ -1,5 +1,7 @@
 import { URL, fetchGoods } from './getGoods.js';
 import pageElements from './getPageData.js';
+import { setEventsAllEditBtns } from './controlCrm.js';
+import { renderModal } from './renderModal.js';
 const {
 	crmSubtitlePrice,
 	modalWindowProductId,
@@ -38,6 +40,44 @@ const createRow = (obj) => {
 	);
 };
 
+const replaceRow = (obj, replace, id) => {
+	const allRows = document.querySelectorAll('.crm__table__t tbody tr');
+	const newRow = document.createElement('tr');
+	newRow.innerHTML = `
+	<td>${obj.id}</td>
+       <td>${obj.title}</td>
+       <td>${obj.category}</td>
+       <td>${obj.units}</td>
+       <td>${obj.count}</td>
+       <td>${obj.price}</td>
+       <td>${obj.price * obj.count}</td>
+       <td>
+         <button type="button" class="crm__table__prod-btn
+          crm__table__prod-btn--img" data-pic="/img/prodCover.jpg">
+         </button>
+       </td>
+       <td>
+         <button type="button"
+         class="crm__table__prod-btn crm__table__prod-btn--edit">
+         </button>
+       </td>
+       <td>
+         <button type="button"
+         class="crm__table__prod-btn crm__table__prod-btn--del">
+         </button>
+       </td>
+	`;
+	allRows.forEach(item => {
+		if (item.firstElementChild.textContent === id) {
+			item.replaceChild(newRow, item);
+			item.addEventListener('click', () => {
+				const rowProductId = +closestRow.firstElementChild.textContent;
+				renderModal(rowProductId);
+			})
+		}
+	})
+}
+
 // 2. Создайте функцию renderGoods, принимает один параметр массив с объектами
 // Функция renderGoods перебирает массив и вставляет строки,
 // созданные на основе createRow, в таблицу (советую использовать метод map)
@@ -52,6 +92,7 @@ export const renderGoods = (err, data) => {
 		);
 	}
 	data.map((item) => createRow(item));
+	setEventsAllEditBtns();
 };
 
 // 8. Итоговая стоимость над таблицей
@@ -75,9 +116,19 @@ export const removeGoods = (dataId) => {
 	return goods;
 };
 
-export const renderNewProduct = async (newProduct) => {
-	createRow(await newProduct);
-	console.log(newProduct);
+export const renderNewProduct = async (newProduct, replace, id) => {
+	if (replace === true) {
+		replaceRow(await newProduct, replace, id);
+	} else {
+		createRow(await newProduct);
+
+		const tbody = document.querySelector('.crm__table__t tbody');
+		tbody.lastElementChild.addEventListener('click', ({ target }) => {
+			const closestRow = target.closest('tr');
+			const rowProductId = +closestRow.firstElementChild.textContent;
+			renderModal(rowProductId);
+		});
+	}
 };
 
 export const removeTableRow = (closestRow) => {

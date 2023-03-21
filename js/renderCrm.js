@@ -1,7 +1,5 @@
 import { URL, fetchGoods } from './getGoods.js';
 import pageElements from './getPageData.js';
-import { setEventsAllEditBtns } from './controlCrm.js';
-import { renderModal } from './renderModal.js';
 const {
 	crmSubtitlePrice,
 	modalWindowProductId,
@@ -12,8 +10,8 @@ import { getTotalPrice } from './controlCrm.js';
 // объект и на основе объекта формировать элемент <tr> с <td> внутри
 const createRow = (obj) => {
 	const tableBody = document.querySelector('.crm__table__t tbody');
-	tableBody.insertAdjacentHTML('beforeend', `
-    <tr>
+	const newRow = document.createElement('tr');
+	newRow.insertAdjacentHTML('afterbegin', `
        <td>${obj.id}</td>
        <td>${obj.title}</td>
        <td>${obj.category}</td>
@@ -36,11 +34,20 @@ const createRow = (obj) => {
          class="crm__table__prod-btn crm__table__prod-btn--del">
          </button>
        </td>
-    </tr>`,
-	);
+		 `);
+
+	// const editBtn = newRow.querySelector(
+	// 	'.crm__table__prod-btn--edit');
+
+	// editBtn.addEventListener('click', ({ target }) => {
+	// 	const closestRow = target.closest('tr');
+	// 	const rowProductId = closestRow.firstElementChild.textContent;
+	// 	renderModal(rowProductId);
+	// });
+	tableBody.append(newRow);
 };
 
-const replaceRow = (obj, replace, id) => {
+const replaceRow = (obj, id) => {
 	const allRows = document.querySelectorAll('.crm__table__t tbody tr');
 	const newRow = document.createElement('tr');
 	newRow.innerHTML = `
@@ -67,16 +74,16 @@ const replaceRow = (obj, replace, id) => {
          </button>
        </td>
 	`;
-	allRows.forEach(item => {
-		if (item.firstElementChild.textContent === id) {
-			item.replaceChild(newRow, item);
-			item.addEventListener('click', () => {
-				const rowProductId = +closestRow.firstElementChild.textContent;
-				renderModal(rowProductId);
-			})
-		}
-	})
-}
+	// allRows.forEach(item => {
+	// 	if (item.firstElementChild.textContent == id) {
+	// 		item.parentNode.replaceChild(newRow, item);
+	// 		item.addEventListener('click', () => {
+	// 			const rowProductId = +closestRow.firstElementChild.textContent;
+	// 			renderModal(rowProductId);
+	// 		});
+	// 	};
+	// });
+};
 
 // 2. Создайте функцию renderGoods, принимает один параметр массив с объектами
 // Функция renderGoods перебирает массив и вставляет строки,
@@ -92,7 +99,7 @@ export const renderGoods = (err, data) => {
 		);
 	}
 	data.map((item) => createRow(item));
-	setEventsAllEditBtns();
+	// setEventsAllEditBtns();
 };
 
 // 8. Итоговая стоимость над таблицей
@@ -118,26 +125,43 @@ export const removeGoods = (dataId) => {
 
 export const renderNewProduct = async (newProduct, replace, id) => {
 	if (replace === true) {
-		replaceRow(await newProduct, replace, id);
+		replaceRow(await newProduct, id);
 	} else {
 		createRow(await newProduct);
-
-		const tbody = document.querySelector('.crm__table__t tbody');
-		tbody.lastElementChild.addEventListener('click', ({ target }) => {
-			const closestRow = target.closest('tr');
-			const rowProductId = +closestRow.firstElementChild.textContent;
-			renderModal(rowProductId);
-		});
 	}
+	renderCrmPrice();
 };
 
 export const removeTableRow = (closestRow) => {
-	const rowProductId = +closestRow.firstElementChild.textContent;
-	closestRow.remove();
+	const rowProductId = closestRow.firstElementChild.textContent;
+
+	let count = 6;
+	closestRow.innerHTML = `
+<td>Данные удалены, скрытие через: ${count}</td>
+`;
+
+	setInterval(() => {
+		if (count <= 0) {
+			closestRow.innerHTML = `
+			<td>Готово</td>`;
+			setTimeout(() => {
+				closestRow.remove();
+			}, 2000);
+			clearInterval();
+		} else {
+			count--;
+			closestRow.innerHTML = `
+				<td> Данные удалены, скрытие через: ${count}</td>
+					`;
+		};
+	}, 1000);
+
+
+
 	return rowProductId;
 };
 
 export const renderNewId = (id) => {
-	modalWindowProductId.innerText = `id: ${id}`;
+	modalWindowProductId.innerText = `id: ${id} `;
 };
 

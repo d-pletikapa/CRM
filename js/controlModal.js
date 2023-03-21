@@ -54,9 +54,13 @@ export const launchModalEvents = (editProdId) => {
 
 	// modal close
 	const closeModal = () => {
-		// modalWindowOverlay.classList.add('crm-modal-window--visible');
 		modalWindowOverlay.remove();
 	};
+
+	const removeSubmitBtn = () => {
+		const submitBtn = modalWindowOverlay.querySelector('.crm-modal-window__send-btn');
+		submitBtn.remove();
+	}
 
 	// Реализовать добавление нового товара из формы в таблицу 1
 	const createNewProduct = (formData) => {
@@ -69,8 +73,6 @@ export const launchModalEvents = (editProdId) => {
 			Object.getOwnPropertyDescriptor(newProduct, 'product-name'),
 		);
 		delete newProduct['product-name'];
-		// newProduct.id = tempId.value; // добавляем id
-		// goods.push(newProduct);
 		return newProduct;
 	};
 
@@ -82,7 +84,6 @@ export const launchModalEvents = (editProdId) => {
 
 		if (id) {
 			method = 'PATCH';
-			body = JSON.stringify(createNewProduct(formData));
 			url = `${URL}/${id}`;
 			replace = true;
 		}
@@ -96,16 +97,17 @@ export const launchModalEvents = (editProdId) => {
 						modalWindowForm.append(createModalErr(err));
 						const closeErrBtn = document.querySelector('.window__error--close');
 
-						closeErrBtn.addEventListener('click', (e) => {
+						closeErrBtn.addEventListener('click', () => {
 							const modalError = document.querySelector('.crm-modal-window__error');
 							modalWindowForm.removeChild(modalError);
 						});
 						console.warn(err, data);
 					}
 					modalWindowForm.textContent = `Товар успешно заведен в систему, id товара ${data.id}`;
-					console.info('Товар создан:', data.id);
+					console.info('Товар сохранен на сервере:', data.id);
+					removeSubmitBtn();
 					setTimeout(closeModal, 4000);
-					setTimeout(modalWindowForm.reset(), 4000);
+					setTimeout(modalWindowForm.reset(), 3900);
 					return data;
 				},
 				headers: {
@@ -147,7 +149,6 @@ export const launchModalEvents = (editProdId) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		sendAndRenderProd(formData, editProdId);
-		renderCrmPrice();
 	});
 
 };

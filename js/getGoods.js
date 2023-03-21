@@ -48,14 +48,10 @@ export const fetchGoods = async (url, {
 };
 
 export const loadProdList = () => {
-	// const checkLoad = await
 	fetchGoods(URL, {
 		method: 'get',
 		callback: renderGoods,
 	});
-	// if (checkLoad) {
-	// 	setEventsAllEditBtns();
-	// }
 };
 
 export const getEditProd = async (editProdId) => {

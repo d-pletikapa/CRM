@@ -56,7 +56,6 @@ export const renderModal = async (editProdId) => {
 	const modal = document.createElement('div');
 	if (editProdId) {
 		const editProd = await getEditProd(editProdId);
-		console.log("🚀 ~ file: renderModal.js:72 ~ renderModal ~ editProd:", editProd);
 		modal.insertAdjacentHTML('afterbegin', `
 			<div class="crm-modal-window crm-modal-window--overlay">
 

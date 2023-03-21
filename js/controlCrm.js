@@ -13,12 +13,6 @@ export const debounce = (func, timeout = 300) => {
 		}, timeout);
 	};
 };
-// const handle = (arg1, arg2) => {
-// 	console.log(count++);
-// };
-// const debounceHandle = debounce(handle);
-// const circle = document.querySelector('.circle');
-// circle.addEventListener('mousemove', debounceHandle);
 
 // 7. Итоговая стоимость в модальном окне
 // должна правильно высчитываться при смене фокуса
@@ -56,7 +50,7 @@ table.addEventListener('click', e => {
 	const target = e.target;
 	if (target === target.closest('.crm__table__prod-btn--del')) {
 		const closestRow = target.closest('tr');
-		const rowProductId = +closestRow.firstElementChild.textContent;
+		const rowProductId = closestRow.firstElementChild.textContent;
 
 		fetchGoods(`${URL}/${rowProductId}`, {
 			method: 'delete',
@@ -73,27 +67,15 @@ table.addEventListener('click', e => {
 	} else if (target === target.closest('.crm__table__prod-btn--img')) {
 		const thisBtnPreview = target.closest('.crm__table__prod-btn--img');
 		createPopupCoverWindow(thisBtnPreview);
+	} else if (target === target.closest('.crm__table__prod-btn--edit')) {
+		const closestRow = target.closest('tr');
+		const rowProductId = closestRow.firstElementChild.textContent;
+		renderModal(rowProductId);
 	}
 });
 
 // modal open
 btnAddProduct.addEventListener('click', () => {
-	// tempId.createNewId();
-	// renderNewId(tempId.value);
-	// modalWindowOverlay.classList.remove('crm-modal-window--visible');
 	renderModal();
 });
 
-export const setEventsAllEditBtns = () => {
-	const editBtns = document.querySelectorAll(
-		'.crm__table__prod-btn--edit');
-
-	[...editBtns].forEach(item => {
-		item.addEventListener('click', ({ target }) => {
-			const closestRow = target.closest('tr');
-			const rowProductId = +closestRow.firstElementChild.textContent;
-			console.log(123)
-			renderModal(rowProductId);
-		});
-	});
-};

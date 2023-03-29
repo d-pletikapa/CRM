@@ -18,7 +18,7 @@
 // ];
 import { renderGoods } from './renderCrm.js';
 
-export const URL = 'https://adventurous-fifth-hedge.glitch.me/api/goods';
+export const TheURL = 'https://adventurous-fifth-hedge.glitch.me/api/goods';
 export const fetchGoods = async (url, {
 	method = 'get',
 	callback = (err, data) => {
@@ -48,14 +48,14 @@ export const fetchGoods = async (url, {
 };
 
 export const loadProdList = () => {
-	fetchGoods(URL, {
+	fetchGoods(TheURL, {
 		method: 'get',
 		callback: renderGoods,
 	});
 };
 
 export const getEditProd = async (editProdId) => {
-	const editProd = await fetchGoods(`${URL}/${editProdId}`, {
+	const editProd = await fetchGoods(`${TheURL}/${editProdId}`, {
 		method: 'get',
 		callback: (err, data) => {
 			if (err) {

@@ -131,7 +131,10 @@ export const renderModal = async (editProdId) => {
 							изображение
 							<input name="image" type="file" accept="image/png, image/jpeg" value="${editProd.image}">
 						</label>
+						
 					</fieldset>
+
+					<div class="crm-modal-window__image-preview"></div>
 
 				</form>
 				<div class="crm-modal-window__footer">
@@ -215,9 +218,11 @@ export const renderModal = async (editProdId) => {
 					<label
 						class="crm-modal-window__item crm-modal-window__item--image crm-modal-window__legend-image">Добавить
 						изображение
-						<input name="image" type="file" accept="image/png, image/jpeg">
+						<input class="item__preview-file" name="image" type="file" value="" accept="image/png, image/jpeg">
 					</label>
+					
 				</fieldset>
+				<div class="crm-modal-window__image-preview"></div>
 
 			</form>
 			<div class="crm-modal-window__footer">

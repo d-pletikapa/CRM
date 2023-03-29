@@ -108,6 +108,7 @@
 	padding-inline-start: 0;
 	padding-inline-end: 0;
 	padding-block-end: 0;
+	margin-bottom: 30px;
 }
 
 .crm-modal-window__legend-naming {
@@ -179,6 +180,12 @@
 
 .crm-modal-window__item:last-child {
 	margin-bottom: 0;
+}
+
+.crm-modal-window__image-preview {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: space-around;
 }
 
 .crm-modal-window__list span {
@@ -370,7 +377,7 @@
 
 
 @media (max-width: 1024px) {
-	.crm-modal-window {}
+	/* .crm-modal-window {} */
 
 	.crm-modal-window__list {
 		display: flex;

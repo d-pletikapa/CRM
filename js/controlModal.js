@@ -2,8 +2,7 @@ import { renderNewProduct } from './renderCrm.js';
 import { getTotalPrice } from './controlCrm.js';
 import { createModalErr } from './renderModal.js';
 import { debounce } from './controlCrm.js';
-import { renderCrmPrice } from './renderCrm.js';
-import { URL, fetchGoods } from './getGoods.js';
+import { TheURL, fetchGoods } from './getGoods.js';
 
 
 export const formPriceControl = () => {
@@ -11,12 +10,43 @@ export const formPriceControl = () => {
 		'.crm-modal-window__form');
 	const modalWindowTotalPrice = document.querySelector(
 		'.crm-modal-window__totalPrice');
+	const modalWindowImagePreview = document.querySelector('.crm-modal-window__image-preview');
+	const modalWindowPreviewFile = document.querySelector('.item__preview-file');
+
+
+	modalWindowPreviewFile.addEventListener('change', () => {
+		let files = modalWindowPreviewFile.files;
+		let file = files[0];
+		if (files.length > 0 && file.size <= 1e6) {
+			const src = URL.createObjectURL(file);
+			console.log(file);
+			modalWindowImagePreview.innerHTML = `
+			<img class="preview" src="${src}" width="200px">
+			`;
+		} else if (file.size >= 1e6) {
+			modalWindowImagePreview.innerHTML = ``;
+			console.info('Изображение не должно превышать размер 1 Мб');
+			const imageErr = document.createElement('p');
+			imageErr.innerText = `Изображение не должно превышать размер 1 Мб`;
+			imageErr.className = 'preview-err';
+			imageErr.style.cssText = `
+			font-weight: 700;
+			font-size: 14px;
+			line-height: 17px;
+			text-align: center;
+			letter-spacing: 0.1em;
+			text-transform: uppercase;
+			color: #D80101;`;
+			modalWindowImagePreview.append(imageErr);
+		};
+	});
+
 
 	// 7. Итоговая стоимость в модальном окне
 	// должна правильно высчитываться при смене фокуса
 	const renderFormPrice = async () => {
 		const totalPrice = await
-			fetchGoods(URL, {
+			fetchGoods(TheURL, {
 				method: 'get',
 				callback: getTotalPrice,
 			});
@@ -27,7 +57,7 @@ export const formPriceControl = () => {
 
 	const dynamicFormPrice = async () => {
 		let summary = await
-			fetchGoods(URL, {
+			fetchGoods(TheURL, {
 				method: 'get',
 				callback: getTotalPrice,
 			});
@@ -79,12 +109,12 @@ export const launchModalEvents = (editProdId) => {
 	const sendAndRenderProd = (formData, id) => {
 		let method = 'POST';
 		let body = createNewProduct(formData);
-		let url = URL;
+		let url = TheURL;
 		let replace = false;
 
 		if (id) {
 			method = 'PATCH';
-			url = `${URL}/${id}`;
+			url = `${TheURL}/${id}`;
 			replace = true;
 		}
 

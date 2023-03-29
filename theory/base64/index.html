@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Base64</title>
+	<script defer src="./script.js"></script>
+</head>
+
+<body style="background-color: #181a1b; color: #fff;">
+	<div class="center" style="display: flex; margin: 0 auto; width: calc(50% - 350px); justify-content: space-around;">
+		<form action="" class="form-input" style="width: 350px; height: 400px; position: relative; top: 400px;">
+			<label class="label" for="image">
+				Upload Image
+			</label>
+			<input type="file" class="file" id="image" name="image" accept="image/*">
+
+			<div class="wrapper">
+				<img class="preview">
+			</div>
+			<button class="submit" type="submit">Отправить</button>
+		</form>
+	</div>
+</body>
+<style>
+	.preview {
+		display: none;
+	}
+</style>
+
+</html>

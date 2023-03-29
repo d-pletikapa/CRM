@@ -1,4 +1,4 @@
-import { URL, fetchGoods } from './getGoods.js';
+import { TheURL, fetchGoods } from './getGoods.js';
 import pageElements from './getPageData.js';
 const {
 	crmSubtitlePrice,
@@ -106,7 +106,7 @@ export const renderGoods = (err, data) => {
 // должна корректно отображать сумму всех товаров
 export const renderCrmPrice = async () => {
 	const totalPrice = await
-		fetchGoods(URL, {
+		fetchGoods(TheURL, {
 			method: 'get',
 			callback: getTotalPrice,
 		});

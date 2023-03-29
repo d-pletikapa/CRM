@@ -1,7 +1,7 @@
 import pageElements from './getPageData.js';
 const { modalWindowTotalPrice, table, btnAddProduct } = pageElements;
 import { removeTableRow } from './renderCrm.js';
-import { URL, fetchGoods } from './getGoods.js';
+import { TheURL, fetchGoods } from './getGoods.js';
 import { renderModal } from './renderModal.js';
 
 export const debounce = (func, timeout = 300) => {
@@ -52,7 +52,7 @@ table.addEventListener('click', e => {
 		const closestRow = target.closest('tr');
 		const rowProductId = closestRow.firstElementChild.textContent;
 
-		fetchGoods(`${URL}/${rowProductId}`, {
+		fetchGoods(`${TheURL}/${rowProductId}`, {
 			method: 'delete',
 			callback: (err, data) => {
 				if (err) {

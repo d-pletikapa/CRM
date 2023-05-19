@@ -48,6 +48,7 @@
             <option value="шт.">Штуки (шт.)</option>
             <option value="уп.">Упаковки (уп.)</option>
             <option value="л.">Литры (л.)</option>
+            <option value="gramms">Gramms (g)</option>
           </select>
         </label>
 
@@ -55,8 +56,11 @@
         <label class="crm-modal-window__item crm-modal-window__item--discount">
           <span class="crm-modal-window__legend-discount">Дисконт</span>
 
-          <input class="crm-modal-window--checkbox-style" name="discountCheck" type="checkbox" value="No">
-          <input class="crm-modal-window__input--fit-size crm-modal-window__input--checked" name="discountText" type="text" disabled required>
+          <input class="crm-modal-window--checkbox-style" name="discountCheck"
+           type="checkbox" value="No">
+          <input class="crm-modal-window__input--fit-size
+           crm-modal-window__input--checked crm-modal-window__input-discount"
+           name="discountText" type="text" disabled required>
         </label>
 
 <!--        <span class="crm-modal-window__legend-description">Описание</span>-->
@@ -64,7 +68,8 @@
           <span class="crm-modal-window__legend-description">Описание</span>
 
           <textarea class="crm-modal-window--textarea-big" name="description"
-                    form="crm-modal-window__form" required></textarea>
+                    form="crm-modal-window__form" required 
+                    placeholder="Минимум 80 символов"></textarea>
         </label>
 
 <!--        <span class="crm-modal-window__legend-quantity">Количество</span>-->

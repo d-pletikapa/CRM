@@ -14,7 +14,17 @@ const {
   btnAddProduct,
   modalWindowOverlay,
   table,
+  inputNaming,
+  inputCategory,
+  inputDescription,
+  inputCounter,
+  inputQuantity,
+  inputPrice,
+  inputDiscount,
+  descriptionLegend,
 } = pageElements;
+import {reg1, reg2, reg3} from './reg.js';
+
 const closeModal = () => {
   modalWindowOverlay.classList.add('crm-modal-window--visible');
 };
@@ -137,3 +147,58 @@ table.addEventListener('click', e => {
   }
 });
 
+// modalWindowForm.addEventListener('input', (...target) => {
+//   if (target.closest(inputQuantity)) {
+//     inputQuantity.textContent = inputQuantity.value.replace(reg3, '');
+//   } else if (target.closest(inputPrice)) {
+//     inputPrice.textContent = inputPrice.value.replace(reg3, '');
+//   } else if (target.closest(inputDiscount)) {
+//     inputDiscount.textContent = inputDiscount.value.replace(reg3, '');
+//   } else if (target.closest(inputCounter)) {
+//     inputCounter.value.replace(reg2, '');
+//   } else if (target.closest(inputNaming)) {
+//     inputNaming.textContent = inputNaming.value.replace(reg1, '');
+//   } else if (target.closest(inputCategory)) {
+//     inputCategory.textContent = inputCategory.value.replace(reg1, '');
+//   } else if (target.closest(inputDescription)) {
+//     inputDescription.textContent = inputDescription.value.replace(reg1, '');
+//     const minLength = 80;
+//     const value = inputDescription.value;
+    
+//     if (value.length < minLength) {
+//       inputDescription.setCustomValidity(
+//         "Минимальное количество символов: " + minLength);
+//     } else {
+//       inputDescription.setCustomValidity("");
+//     };
+//   };
+// });
+
+modalWindowForm.addEventListener('input', ({ target }) => {
+  switch (target) {
+    case inputQuantity:
+    case inputPrice:
+    case inputDiscount:
+      target.value = target.value.replace(reg3, '');
+      break;
+    case inputCounter:
+      target.value = target.value.replace(reg2, '');
+      break;
+    case inputNaming:
+    case inputCategory:
+      target.value = target.value.replace(reg1, '');
+      break;
+    case inputDescription:
+      target.value = target.value.replace(reg1, '');
+      const minLength = 80;
+      const value = target.value;
+      if (value.length <= minLength) {
+        descriptionLegend.textContent = `Описание ${value.length}/${minLength}`;
+        target.setCustomValidity("Минимальное количество символов: " + minLength);
+      } else {
+        descriptionLegend.textContent = `Описание ✔`;
+        target.setCustomValidity("");
+      };
+      break;
+  };  
+});

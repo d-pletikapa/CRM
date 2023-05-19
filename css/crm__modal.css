@@ -74,7 +74,7 @@
 
 
 .crm-modal-window__form {
-  max-width: 580px;
+  min-width: 306px;
   min-height: 403px;
   padding: 28px;
   margin-bottom: 32px;
@@ -130,6 +130,7 @@
     grid-area: crm-modal-window__legend-discount;
   }
   .crm-modal-window__item--discount {
+    min-width: 250px;
     display: inline;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -345,10 +346,6 @@
 
 
 @media (max-width: 1024px) {
-  .crm-modal-window {
-
-  }
-
   .crm-modal-window__list {
     display: flex;
     width: 100%;

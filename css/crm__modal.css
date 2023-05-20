@@ -75,7 +75,7 @@
 
 
 .crm-modal-window__form {
-	max-width: 580px;
+	min-width: 306px;
 	min-height: 403px;
 	position: relative;
 	padding: 28px;
@@ -140,6 +140,7 @@
 }
 
 .crm-modal-window__item--discount {
+	min-width: 250px;
 	display: inline;
 	flex-flow: row wrap;
 	justify-content: space-between;

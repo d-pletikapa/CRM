@@ -3,7 +3,7 @@ import { getTotalPrice } from './controlCrm.js';
 import { createModalErr } from './renderModal.js';
 import { debounce } from './controlCrm.js';
 import { TheURL, fetchGoods } from './getGoods.js';
-
+import {reg1, reg2, reg3} from './reg.js';
 
 export const formPriceControl = () => {
 	const modalWindowForm = document.querySelector(
@@ -81,6 +81,22 @@ export const launchModalEvents = (editProdId) => {
 		'.crm-modal-window__input--fit-size');
 	const modalWindowOverlay = document.querySelector(
 		'.crm-modal-window--overlay');
+	const inputNaming = document.querySelector(
+		'.crm-modal-window__item--naming input');
+	const inputCategory = document.querySelector(
+		'.crm-modal-window__item--category input');
+	const inputDescription = document.querySelector(
+		'.crm-modal-window--textarea-big');
+	const inputCounter = document.querySelector(
+		'.crm-modal-window__item--counter select');
+	const inputQuantity = document.querySelector(
+		'.crm-modal-window__item--quantity input');
+	const inputPrice = document.querySelector(
+		'.crm-modal-window__item--price input');
+	const inputDiscount = document.querySelector(
+		'.crm-modal-window__input-discount');
+	const descriptionLegend = document.querySelector(
+		'.crm-modal-window__legend-description');
 
 	// modal close
 	const closeModal = () => {
@@ -179,6 +195,35 @@ export const launchModalEvents = (editProdId) => {
 		e.preventDefault();
 		const formData = new FormData(e.target);
 		sendAndRenderProd(formData, editProdId);
+	});
+
+	modalWindowForm.addEventListener('input', ({ target }) => {
+		switch (target) {
+			case inputQuantity:
+			case inputPrice:
+			case inputDiscount:
+				target.value = target.value.replace(reg3, '');
+				break;
+			case inputCounter:
+				target.value = target.value.replace(reg2, '');
+				break;
+			case inputNaming:
+			case inputCategory:
+				target.value = target.value.replace(reg1, '');
+				break;
+			case inputDescription:
+				target.value = target.value.replace(reg1, '');
+				const minLength = 80;
+				const value = target.value;
+				if (value.length <= minLength) {
+					descriptionLegend.textContent = `Описание ${value.length}/${minLength}`;
+					target.setCustomValidity("Минимальное количество символов: " + minLength);
+				} else {
+					descriptionLegend.textContent = `Описание ✔`;
+					target.setCustomValidity("");
+				};
+				break;
+		};  
 	});
 
 };

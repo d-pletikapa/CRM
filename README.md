@@ -9,3 +9,4 @@
 ## 6-06 upd
 ## 6-07 upd
 ## 6-08 upd
+## 6-10 upd RegExp added

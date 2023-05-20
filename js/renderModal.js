@@ -92,6 +92,7 @@ export const renderModal = async (editProdId) => {
 								<option value="шт.">Штуки (шт.)</option>
 								<option value="уп.">Упаковки (уп.)</option>
 								<option value="л.">Литры (л.)</option>
+								<option value="gramms">Gramms (g)</option>
 							</select>
 						</label>
 
@@ -99,15 +100,15 @@ export const renderModal = async (editProdId) => {
 							<span class="crm-modal-window__legend-discount">Дисконт</span>
 
 							<input class="crm-modal-window--checkbox-style" name="discountCheck" type="checkbox" value="No">
-							<input class="crm-modal-window__input--fit-size crm-modal-window__input--checked" name="discountText"
-								type="text" disabled required>
+          		<input class="crm-modal-window__input--fit-size crm-modal-window__input--checked crm-modal-window__input-discount" 
+							name="discountText" type="text" disabled required>
 						</label>
 
 						<label class="crm-modal-window__item crm-modal-window__item--description">
 							<span class="crm-modal-window__legend-description">Описание</span>
 
 							<textarea class="crm-modal-window--textarea-big" name="description" form="crm-modal-window__form"
-								required>${editProd.description}</textarea>
+								required placeholder="Минимум 80 символов">${editProd.description}</textarea>
 						</label>
 
 						<label class="crm-modal-window__item crm-modal-window__item--quantity">
@@ -129,7 +130,7 @@ export const renderModal = async (editProdId) => {
 						<label
 							class="crm-modal-window__item crm-modal-window__item--image crm-modal-window__legend-image">Добавить
 							изображение
-							<input name="image" type="file" accept="image/png, image/jpeg" value="${editProd.image}">
+							<input class="item__preview-file" name="image" type="file" accept="image/png, image/jpeg" value="${editProd.image}">
 						</label>
 						
 					</fieldset>
@@ -183,6 +184,7 @@ export const renderModal = async (editProdId) => {
 							<option value="шт.">Штуки (шт.)</option>
 							<option value="уп.">Упаковки (уп.)</option>
 							<option value="л.">Литры (л.)</option>
+							<option value="gramms">Gramms (g)</option>
 						</select>
 					</label>
 
@@ -190,15 +192,15 @@ export const renderModal = async (editProdId) => {
 						<span class="crm-modal-window__legend-discount">Дисконт</span>
 
 						<input class="crm-modal-window--checkbox-style" name="discountCheck" type="checkbox" value="No">
-						<input class="crm-modal-window__input--fit-size crm-modal-window__input--checked" name="discountText"
-							type="text" disabled required>
+          	<input class="crm-modal-window__input--fit-size crm-modal-window__input--checked crm-modal-window__input-discount"
+						 name="discountText" type="text" disabled required>
 					</label>
 
 					<label class="crm-modal-window__item crm-modal-window__item--description">
 						<span class="crm-modal-window__legend-description">Описание</span>
 
 						<textarea class="crm-modal-window--textarea-big" name="description" form="crm-modal-window__form"
-							required></textarea>
+							required placeholder="Минимум 80 символов"></textarea>
 					</label>
 
 					<label class="crm-modal-window__item crm-modal-window__item--quantity">

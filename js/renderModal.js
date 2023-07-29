@@ -1,5 +1,6 @@
 import { launchModalEvents, formPriceControl } from './controlModal.js';
-import { getEditProd } from './getGoods.js';
+import { getEditProd, getCategoryList, TheBaseURL, getImg } from './getGoods.js';
+
 const styles = new Map();
 const loadStyles = (url) => {
 	if (styles.has(url)) {
@@ -51,18 +52,57 @@ box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
 // Если мы редактируем товар, то необходимо выполнить запрос на сервер
 // GET / api / goods / { id } - получить товар по его ID
 // На основе поленных данных в модальном окне должны заполнятся поля
+export const editImg = {
+	set(url) {
+		this.url = url;
+	},
+	get() {
+		return this.url;
+	}
+};
+
+	const renderImagePreview = async () => {
+		const modalWindowImagePreview = document.querySelector('.crm-modal-window__image-preview');
+		try {
+			const previewImage = await getImg(editImg.url);
+			// const previewImage = await getImg();
+			if (previewImage) {
+				modalWindowImagePreview.append(previewImage);
+			} 
+			else {
+				console.warn('No image preview available.');
+			}
+		} catch (error) {
+			console.warn('Error loading image:', error);
+		}
+	};
+
 export const renderModal = async (editProdId) => {
 	await loadStyles('../css/crm__modal.css');
 	const modal = document.createElement('div');
+
+	const createCategoryList = (array) => array.map(item => {
+		const option = document.createElement('option');
+		option.value = item;
+		return option;
+	});
+	
+	const renderCategoryList = async () => {
+		const categoryList = document.querySelector('#category-list');
+		const categoryData = await getCategoryList();
+		categoryList.append(...createCategoryList(categoryData));
+	};
+
 	if (editProdId) {
 		const editProd = await getEditProd(editProdId);
+		editImg.set(TheBaseURL + editProd.image);
 		modal.insertAdjacentHTML('afterbegin', `
 			<div class="crm-modal-window crm-modal-window--overlay">
 
 			<div class="crm-modal-window__block">
 				<button class="crm-modal-window--close" title="close pop-up window"></button>
 				<div class="crm-modal-window__title-block">
-					<h3 class="crm-modal-window__title">Добавить ТОВАР</h3>
+					<h3 class="crm-modal-window__title">Редактировать ТОВАР</h3>
 					<span class="crm-modal-window__vendor-code__id">${editProd.id}</span>
 				</div>
 				<div class="crm-modal-window__line"></div>
@@ -79,9 +119,11 @@ export const renderModal = async (editProdId) => {
 
 						<label class="crm-modal-window__item crm-modal-window__item--category">
 							<span class="crm-modal-window__legend-category">Категория</span>
-							<input name="category" type="text" required="required" value="${editProd.category}">
+							<input id="category-input" name="category" type="text" required="required" value="${editProd.category}" list="category-list">
+							
+							<datalist id="category-list">
+							</datalist>
 						</label>
-
 						<label class="crm-modal-window__item crm-modal-window__item--counter">
 							<span class="crm-modal-window__legend-counter">Единицы измерения</span>
 
@@ -128,14 +170,16 @@ export const renderModal = async (editProdId) => {
 						</label>
 
 						<label
-							class="crm-modal-window__item crm-modal-window__item--image crm-modal-window__legend-image">Добавить
+							class="crm-modal-window__item crm-modal-window__item--image crm-modal-window__legend-image">Изменить
 							изображение
-							<input class="item__preview-file" name="image" type="file" accept="image/png, image/jpeg" value="${editProd.image}">
+							<input class="item__preview-file" name="image" type="file" accept="image/png, image/jpeg">
 						</label>
 						
 					</fieldset>
 
-					<div class="crm-modal-window__image-preview"></div>
+					<div class="crm-modal-window__image-preview">
+					
+					</div>
 
 				</form>
 				<div class="crm-modal-window__footer">
@@ -146,6 +190,7 @@ export const renderModal = async (editProdId) => {
 			</div>
 		</div>
 		`);
+
 	} else {
 		modal.insertAdjacentHTML('afterbegin', `
 		<div class="crm-modal-window crm-modal-window--overlay">
@@ -171,7 +216,10 @@ export const renderModal = async (editProdId) => {
 					<label class="crm-modal-window__item crm-modal-window__item--category">
 						<span class="crm-modal-window__legend-category">Категория</span>
 
-						<input name="category" type="text" required="required">
+						<input id="category-input" name="category" type="text" required="required" list="category-list">
+						<datalist id="category-list">
+						</datalist>
+						
 					</label>
 
 					<label class="crm-modal-window__item crm-modal-window__item--counter">
@@ -239,6 +287,7 @@ export const renderModal = async (editProdId) => {
 	// crm - modal - window--visible
 	document.body.prepend(modal);
 	formPriceControl();
-
+	renderCategoryList();
+	renderImagePreview();
 	editProdId ? launchModalEvents(editProdId) : launchModalEvents();
 };

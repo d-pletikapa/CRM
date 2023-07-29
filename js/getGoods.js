@@ -1,24 +1,10 @@
-// export const goods = [
-// 	{
-// 		'id': 253842678,
-// 		'title': 'Смартфон Xiaomi 11T 8/128GB',
-// 		'category': 'mobile-phone',
-// 		'units': 'шт.',
-// 		'count': 3,
-// 		'price': 27000,
-// 	},
-// 	{
-// 		'id': 296378448,
-// 		'title': 'Радиоуправляемый автомобиль Cheetan',
-// 		'category': 'toys',
-// 		'price': 4000,
-// 		'units': 'шт.',
-// 		'count': 1,
-// 	},
-// ];
 import { renderGoods } from './renderCrm.js';
+import { imgBaseURL } from './controlCrm.js';
+import {editImg} from './renderModal.js';
 
 export const TheURL = 'https://adventurous-fifth-hedge.glitch.me/api/goods';
+const TheCategoryURL = 'https://adventurous-fifth-hedge.glitch.me/api/category';
+export const TheBaseURL = 'https://adventurous-fifth-hedge.glitch.me/';
 export const fetchGoods = async (url, {
 	method = 'get',
 	callback = (err, data) => {
@@ -47,6 +33,63 @@ export const fetchGoods = async (url, {
 	}
 };
 
+const renderImg = async (err, data) => {
+  return new Promise(async (resolve, reject) => {
+    if (err) {
+      console.warn(err, data);
+      const img = document.createElement('img');
+      img.className = 'preview';
+      img.style.width = '200px';
+      img.src = `${imgBaseURL}/img/prodCover.jpg`;
+      resolve(img);
+    } else {
+      try {
+        const blobData = await fetch(data).then(response => response.blob());
+        const img = document.createElement('img');
+        img.className = 'preview';
+        img.style.width = '200px';
+        img.src = URL.createObjectURL(blobData);
+        resolve(img);
+      } catch (error) {
+        console.warn('Fetch error:', error);
+        reject(error);
+      }
+    }
+  });
+};
+
+// export const getImg = async () => {
+//   const url = editImg.get();
+// 	// const url = editImg.url
+//   if (url) {
+//     try {
+//       const imgElement = await fetchGoods(url, {
+//         method: 'get',
+//         callback: renderImg,
+//       });
+//       return imgElement;
+//     } catch (error) {
+//       console.warn('Fetch error:', error);
+//     }
+//   }
+//   return null; // Вернем null, если URL изображения пустой или если произошла ошибка
+// };
+
+export const getImg = async (url) => {
+  return new Promise((resolve, reject) => {
+    fetchGoods(url, {
+      method: 'get',
+      callback: async (err, data) => {
+        const imgElement = await renderImg(err, data);
+        resolve(imgElement);
+      },
+    });
+  });
+};
+
+
+
+
 export const loadProdList = () => {
 	fetchGoods(TheURL, {
 		method: 'get',
@@ -67,3 +110,18 @@ export const getEditProd = async (editProdId) => {
 	});
 	return editProd;
 };
+
+export const getCategoryList = async () => {
+	const categoryList = await fetchGoods(TheCategoryURL, {
+		method: 'get',
+		callback: (err, data) => {
+			if (err) {
+				console.warn(err, data);
+				return;
+			}
+			return data;
+		},
+	});
+	return categoryList;
+}
+

@@ -31,24 +31,29 @@ export const getTotalPrice = (err, data) => {
 	return totalPrice;
 };
 
-// delete row
+const port = window.location.port ? `:${window.location.port}` : '';
+export const imgBaseURL = window.location.protocol + '//' + window.location.hostname + port;
+// product image preview
 const createPopupCoverWindow = (thisBtnPreview) => {
 	const prodPreviewWindow = open(
 		'about:blank',
 		'',
 		`popup, width=600, height=600,
          top=${screen.height / 2 - 300},
-         left=${screen.width / 2 - 300}`);
-
+         left=${screen.width / 2 - 300}
+				 `
+				 );
 
 	prodPreviewWindow.document.body.style.backgroundImage =
-		`url(http://localhost:63342/JS-4-00${thisBtnPreview.dataset.pic})`;
+		`url(${imgBaseURL}${thisBtnPreview.dataset.pic})`;
 
 	console.log(thisBtnPreview.dataset.pic);
 };
+// delete row
 table.addEventListener('click', e => {
 	const target = e.target;
 	if (target === target.closest('.crm__table__prod-btn--del')) {
+		if (confirm('Удалить товар?')) {
 		const closestRow = target.closest('tr');
 		const rowProductId = closestRow.firstElementChild.textContent;
 
@@ -63,6 +68,7 @@ table.addEventListener('click', e => {
 				removeTableRow(closestRow);
 			},
 		});
+	}
 
 	} else if (target === target.closest('.crm__table__prod-btn--img')) {
 		const thisBtnPreview = target.closest('.crm__table__prod-btn--img');

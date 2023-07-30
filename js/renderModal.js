@@ -53,6 +53,7 @@ box-shadow: 0 0 6px rgba(0, 0, 0, 0.25);
 // GET / api / goods / { id } - получить товар по его ID
 // На основе поленных данных в модальном окне должны заполнятся поля
 export const editImg = {
+	url: '',
 	set(url) {
 		this.url = url;
 	},
@@ -64,7 +65,7 @@ export const editImg = {
 	const renderImagePreview = async () => {
 		const modalWindowImagePreview = document.querySelector('.crm-modal-window__image-preview');
 		try {
-			const previewImage = await getImg(editImg.url);
+			const previewImage = await getImg(editImg.get());
 			// const previewImage = await getImg();
 			if (previewImage) {
 				modalWindowImagePreview.append(previewImage);
@@ -95,7 +96,7 @@ export const renderModal = async (editProdId) => {
 
 	if (editProdId) {
 		const editProd = await getEditProd(editProdId);
-		editImg.set(TheBaseURL + editProd.image);
+		editImg.set(TheBaseURL + await editProd.image);
 		modal.insertAdjacentHTML('afterbegin', `
 			<div class="crm-modal-window crm-modal-window--overlay">
 
